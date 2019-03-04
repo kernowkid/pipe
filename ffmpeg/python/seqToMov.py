@@ -37,5 +37,5 @@ movFile = movFile.replace('/','\\')
 
 
 ##build ffmpeg cmd 
-cmd="ffmpeg -framerate 25 -start_number %s -i %s -s 1920x1080 -c:v libx264 -crf 25 -b:v 4M -pix_fmt yuv420p %s" %(startNumber,newFileName,movFile)
+cmd="ffmpeg -framerate 25 -start_number %s -i %s -s 1920x1080 -c:v libx264 -crf 18 -b:v 4M -pix_fmt yuv420p -movflags +faststart %s" %(startNumber,newFileName,movFile)
 sp.call(cmd,shell=True)
