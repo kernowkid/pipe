@@ -10,30 +10,31 @@ file = file.replace('\\','/')
 ##file name
 origFileName = os.path.basename( file )
 
-
 ##extract path to file
 path = os.path.dirname( file )
 
+##create dir for mp4
+movPath = path+'/'+'mp4/' 
+if not os.path.exists( movPath ):
+        os.mkdir( movPath )
 
 ##rebuild path and file name, replacing frame number with %04d
 fname, fileExt = os.path.splitext(origFileName)
-fileName = '_'.join(fname.split('_')[:-1])
-startNumber = fname.split('_')[-1]
-filePadding = '_%04d'
+
+if '.' not in fname.split('_')[-1]:
+    fileName = '_'.join(fname.split('_')[:-1])
+    startNumber = fname.split('_')[-1]
+    movFileName = '_'.join(origFileName.split('_')[:-1]) + '.mp4'
+else:
+    fileName = fname.split('.')[-2]
+    startNumber = fname.split('.')[-1]
+    movFileName = fileName + '.mp4'
+
+
+paddingAmount = len(startNumber)
+filePadding = '.%0'+ str(paddingAmount)+'d'
 newFileName = path + '/' + fileName + filePadding + fileExt
 newFileName = newFileName.replace('/','\\')
-
-
-##create dir for mp4
-movPath = path+'/'+'mp4/' 
-#if not os.path.exists( movPath ):
-#        os.mkdir( movPath )
-
-
-## create mp4 name and path
-movFileName = '_'.join(origFileName.split('_')[:-1]) + '.mp4'
-movFile = movPath + movFileName
-movFile = movFile.replace('/','\\')
 
 
 ##build ffmpeg cmd 
