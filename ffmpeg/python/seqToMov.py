@@ -25,14 +25,16 @@ if '.' not in fname.split('_')[-1]:
     fileName = '_'.join(fname.split('_')[:-1])
     startNumber = fname.split('_')[-1]
     movFileName = '_'.join(origFileName.split('_')[:-1]) + '.mp4'
+    separator = '_'
 else:
     fileName = fname.split('.')[-2]
     startNumber = fname.split('.')[-1]
     movFileName = fileName + '.mp4'
+    separator = '.'
 
 
 paddingAmount = len(startNumber)
-filePadding = '.%0'+ str(paddingAmount)+'d'
+filePadding = separator + '%0'+ str(paddingAmount)+'d'
 newFileName = path + '/' + fileName + filePadding + fileExt
 newFileName = newFileName.replace('/','\\')
 movFile = movPath + movFileName
